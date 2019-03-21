@@ -1,3 +1,5 @@
+'''
+
 # Задание №1
 print('Задание 2')
 a = int(input('Введите трехзначное число: '))
@@ -67,7 +69,7 @@ else:
 # Задание №5
 print('Задание 5')
 try:
-    e, f = map(str, input('Введите через пробел две буквы [e, f]: ').split())
+    e, f = map(str, input('Введите через пробел две буквы [e, f]: ').lower().split())
 except:
     print('Неправильно вы, дядя Фёдор, буквы вводите')
 else:
@@ -77,9 +79,50 @@ else:
     cyrilic = ord(e) >= cyrFirst and ord(e) <= cyrLast
     start_point = latFirst if not cyrilic else cyrFirst
     print('Буква ' + e + ' стоит на ' + str( ord(e) - start_point + 1 ) + ' месте')
-    print('Между введенными буквами ' + str( ord(f) - ord(e) ) + ' знакомест')
+    print('Буква ' + f + ' стоит на ' + str( ord(f) - start_point + 1 ) + ' месте')
+    print('Между введенными буквами ' + str( abs(ord(f) - ord(e)) ) + ' знакомест')
 
 
 # Задание №6
 print('Задание 6')
+a = int(input('Введите номер буквы латинского алфавита (от ' + str(ord('a')) + ' до ' + str(ord('z')) + '): '))
+print('Это буква \'' + chr(a) + '\'')
+
+'''
+
+# Задание №7
+print('Задание 7')
+a, b, c = map(float, input('Введите через пробел три длины: ').split())
+ok1 = c < (a + b)
+ok2 = a < (c + b)
+ok3 = b < (a + c)
+rs = a == b == c
+rb = not rs and (a == b or b == c or a == c)
+if ok1 and ok2 and ok3:
+    print('Треугольник с введенными длинами существует')
+    if rs:
+        print('Треугольник равносторонний')
+    elif rb:
+        print('Треугольник равнобедренный')
+    else:
+        print('Треугольник разносторонний')
+else:
+    print('Треугольника с введенными длинами НЕ существует')
+
+
+# Задание №8
+print('Задание 8')
+a = int(input('Введите год: '))
+visokos = ((a % 4 == 0) and ((a % 100 != 0) or (a % 400 == 0)))
+if visokos:
+    print('Год ' + str(a) + ' является високосным')
+else:
+    print('Год ' + str(a) + ' високосным НЕ является')
+
+
+# Задание №9
+print('Задание 9')
+l = list(map(float, input('Введите через пробел три числа: ').split()))
+l.sort()
+print('Среднее число равно: ' + str(l[1]))
 
