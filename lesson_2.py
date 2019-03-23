@@ -37,4 +37,18 @@ while d:
 
 # Задание №2
 print('Задание 2')
+x = input('Введите натуральное число: ')
+x = abs(int(x))
+odd = even = 0
+while 1:
+    x, res = divmod(x, 10)
+    odd += res & 1
+    even += (res & 1) ^ 1
+    if x == 0:
+        break
+print('НЕчетных цифр: ' + str(odd))
+print('Четных цифр: ' + str(even))
+
+# Задание №3
+print('Задание 3')
 
