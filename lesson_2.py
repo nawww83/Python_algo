@@ -146,3 +146,29 @@ for i in nl:
 print('Количество вхождений цифры {} в введенную последовательность чисел: {}'.format(d, ds.count(d)))
 
 
+# Задание №9
+print('\nЗадание 9')
+
+def sumd(n):
+    ns = str(n)
+    sum = 0
+    for d in ns:
+        sum += int(d)
+    return sum
+
+N = int(input('Введите количество чисел: '))
+nl = []
+for i in range(N):
+    n = input('Введите число: ')
+    nl.append(n)
+nm = 0
+sd = 0
+for n in nl:
+    tmp = sumd(n)
+    over = tmp > sd
+    sd = tmp if over else sd
+    nm = n if over else nm
+
+print('Число с максимальной суммой цифр {}'.format(nm))
+print(' сумма цифр {}'.format(sd))
+
