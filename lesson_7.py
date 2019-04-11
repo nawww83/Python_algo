@@ -1,11 +1,11 @@
-# Tested on Python 3.7.3
+# Tested on Python 3.7.3, windows 64 bit
 
 import random as rnd
 
 # Задание 1, Bubble sort
 print('\nЗадание 1. Сортировка пузырьком')
 
-n = 100
+n = 50
 a = [rnd.randint(-100,100) for i in range(n)]
 
 print('Исходный массив:')
@@ -68,9 +68,64 @@ print(' Вставками 2:')
 print(a_temp_2)
 
 print('Тест на идентичность списков после работы алгоритмов сортировки:')
-print(a == a_temp and a == a_temp_2 and a_temp == a_temp_2)
+print('    ', a == a_temp and a == a_temp_2 and a_temp == a_temp_2)
 
 '''
 Вывод: сортировка пузырьком требует 1/2 * N^2 проходов цикла,
 сортировка вставками - 1/4 * N^2.
+Попытался перевести цикл While на For в алгоритме сортировки вставками,
+получился незначительный проигрыш по количеству проходов.
 '''
+
+# Задание 2. Merge sort 
+print('\nЗадание 2. Сортировка слиянием')
+
+n = 50
+
+# Recursive merge sort
+# v - input list
+# l - lower bound, u - upper bound
+def merge_sort(v, l, u):
+	if (l < u):
+		h = (l + u) // 2
+		merge_sort(v, l, h)
+		merge_sort(v, h+1, u)
+		merge(v, l, h, u)
+
+# Merge sorted ac and bc into a[l:u+1]
+def merge(a, l, h, u):
+	#print('Before merge: ', l, lh, u, a)
+	ac = a[l : h + 1]
+	bc = a[h + 1 : u + 1]
+	#print('ac: ', ac, ' bc: ', bc)
+	t = []
+	while ac and bc:
+		if (ac[0] < bc[0]):
+			t.append(ac.pop(0))
+		else:
+			t.append(bc.pop(0))
+	#print('t: ', t)
+	if ac: # хвост
+		t += ac
+		#print('tail: ', ac)
+	if bc:
+		t += bc
+		#print('tail: ', bc)
+	a[l : u + 1] = t
+	#print(' after merge: ', a)
+
+a = [rnd.randint(0,50) for i in range(n)]
+
+print('Исходный массив:')
+print(a)
+
+a_temp = a.copy()
+
+nc = merge_sort(a, 0, n)
+print('\nОтсортированный массив:')
+print(a)
+
+nc = bubble_sort(a_temp, n)
+print('Сравнение результата работы сортировки слиянием с результатом \
+сортировки пузырьком:')
+print('    ', a == a_temp)
